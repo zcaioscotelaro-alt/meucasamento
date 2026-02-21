@@ -5,78 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Caio & Yasmin</title>
 
+  <!-- Fonte elegante parecida com o estilo do print -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --ink: rgba(122,60,60,.95);
-      --ink-soft: rgba(122,60,60,.78);
-      --gold: rgba(245, 215, 170, .38);   /* “opacidade” quente estilo a referência */
-      --gold2: rgba(245, 215, 170, .18);
+      /* paleta parecida com o print */
+      --ink: rgba(116, 58, 56, .95);       /* vinho/marrom do texto */
+      --ink-soft: rgba(116, 58, 56, .75);
+      --gold: rgba(245, 214, 162, .55);    /* véu dourado */
+      --gold2: rgba(245, 214, 162, .22);
+      --bg: #0b0b0f;
+      --nav: rgba(255,255,255,.55);
+      --nav-hover: rgba(255,255,255,.85);
     }
 
-    *{ box-sizing:border-box; }
-    html, body{ height:100%; }
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
       font-family: "Cormorant Garamond", serif;
-      overflow:hidden;
-      background:#000;
+      background: var(--bg);
+      color: #fff;
+      overflow-x:hidden;
     }
 
-    .splash{
-      position:relative;
-      width:100%;
-      height:100%;
-      display:grid;
-      place-items:center;
-      isolation:isolate;
+    /* HERO full screen */
+    .hero{
+      min-height: 100vh;
+      position: relative;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
     }
 
-    /* Fundo com imagem local */
     .bg{
-      position:absolute;
-      inset:0;
-      background-color:#0b0b0f;
+      position:absolute; inset:0;
       background-image: var(--bg-url);
       background-size: cover;
-      background-position: center 20%;
+      background-position: center 35%; /* ajusta enquadramento (subir/baixar) */
       background-repeat: no-repeat;
-      transform: scale(1);
-      filter: brightness(.92) saturate(.98) contrast(1.05);
+      filter: saturate(.95) contrast(1.05);
       z-index:0;
     }
 
-    /* camadas douradas (efeito igual do print) */
+    /* “véu” dourado + gradientes pra ficar igual ao print */
     .tint{
-      position:absolute;
-      inset:0;
+      position:absolute; inset:0;
       background:
-        radial-gradient(1100px 760px at 50% 45%, rgba(245,215,170,.55) 0%, rgba(245,215,170,0) 70%),
-        linear-gradient(to bottom, rgba(255,236,200,.35), var(--gold2));
+        radial-gradient(1000px 700px at 35% 55%, rgba(245,214,162,.70) 0%, rgba(245,214,162,0) 70%),
+        linear-gradient(to bottom, rgba(255,235,205,.35), var(--gold2));
       mix-blend-mode: screen;
       opacity: .95;
       z-index:1;
       pointer-events:none;
     }
-
     .veil{
-      position:absolute;
-      inset:0;
+      position:absolute; inset:0;
       background: var(--gold);
-      opacity: .95;
+      opacity: .80;
       z-index:2;
       pointer-events:none;
     }
 
-    /* granulado leve */
+    /* textura/grain */
     .grain{
-      position:absolute;
-      inset:-20%;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
-      opacity:.12;
+      position:absolute; inset:-20%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+      opacity:.13;
       mix-blend-mode: overlay;
       animation: drift 12s linear infinite;
       z-index:3;
@@ -84,22 +82,105 @@
     }
     @keyframes drift{
       0%{ transform: translate3d(0,0,0); }
-      100%{ transform: translate3d(-4%, -3%, 0); }
+      100%{ transform: translate3d(-3%, -2%, 0); }
     }
 
-    .center{
-      position:relative;
-      text-align:center;
-      color: var(--ink);
-      padding: 18px;
-      z-index:10;
+    /* NAV topo */
+    .topbar{
+      position:absolute;
+      top: 22px;
+      left: 0; right: 0;
+      z-index: 10;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 28px;
+      gap: 16px;
+    }
+
+    .monogram{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width: 44px; height: 44px;
+      border: 1px solid rgba(255,255,255,.35);
+      color: rgba(255,255,255,.75);
+      border-radius: 2px;
+      font-weight: 600;
+      letter-spacing: .6px;
+      font-size: 14px;
+      backdrop-filter: blur(6px);
+      background: rgba(255,255,255,.06);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap: 18px;
+      color: var(--nav);
+      font-size: 13px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
       user-select:none;
-      transform: translateY(-8px);
+    }
+
+    .nav a, .nav button{
+      color: inherit;
+      text-decoration:none;
+      background: transparent;
+      border: 0;
+      padding: 8px 6px;
+      cursor:pointer;
+      font: inherit;
+      letter-spacing: inherit;
+      text-transform: inherit;
+    }
+    .nav a:hover, .nav button:hover{
+      color: var(--nav-hover);
+    }
+
+    /* dropdown simples */
+    .dd{
+      position: relative;
+    }
+    .menu{
+      position:absolute;
+      right: 0;
+      top: 38px;
+      min-width: 190px;
+      padding: 10px;
+      border-radius: 12px;
+      background: rgba(12,12,16,.72);
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(10px);
+      display:none;
+    }
+    .menu a{
+      display:block;
+      padding: 10px 10px;
+      border-radius: 10px;
+      letter-spacing: .2px;
+      text-transform: none;
+      font-size: 14px;
+      color: rgba(255,255,255,.82);
+    }
+    .menu a:hover{
+      background: rgba(255,255,255,.08);
+    }
+
+    /* centro */
+    .center{
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      color: var(--ink);
+      transform: translateY(10px);
+      padding: 16px;
     }
 
     .mark{
-      width: 130px;
-      margin: 0 auto 10px;
+      width: 160px;
+      margin: 0 auto 6px;
       opacity: .95;
     }
 
@@ -109,38 +190,28 @@
     }
     .names .top,
     .names .bottom{
-      font-size: clamp(52px, 6vw, 82px);
+      font-size: clamp(56px, 6vw, 92px);
       font-weight: 500;
     }
     .names .amp{
-      font-size: clamp(28px, 3.4vw, 46px);
-      font-weight: 400;
-      margin: 10px 0 6px;
-      opacity: .9;
+      font-size: clamp(30px, 3.2vw, 50px);
       font-style: italic;
+      color: var(--ink-soft);
+      margin: 10px 0 6px;
+    }
+    .date{
+      margin-top: 18px;
+      font-size: 18px;
+      letter-spacing: 3px;
+      color: var(--ink-soft);
     }
 
-    .fade-out{
-      animation: fadeout .9s ease forwards;
-    }
-    @keyframes fadeout{
-      to { opacity: 0; transform: scale(1.01); }
-    }
-
-    /* Pequeno aviso caso imagem não carregue (só aparece se der erro) */
-    .debug{
-      position:fixed;
-      left: 14px;
-      bottom: 14px;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: rgba(0,0,0,.55);
-      border: 1px solid rgba(255,255,255,.15);
-      color: rgba(255,255,255,.85);
-      font: 12px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      z-index: 9999;
-      display:none;
-      max-width: min(520px, calc(100vw - 28px));
+    /* responsivo */
+    @media (max-width: 720px){
+      .topbar{ padding: 0 14px; }
+      .nav{ gap: 10px; font-size: 12px; letter-spacing: 1px; }
+      .mark{ width: 135px; }
+      .date{ font-size: 14px; letter-spacing: 2px; }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -150,30 +221,61 @@
 </head>
 
 <body>
-  <div class="splash" id="splash">
+  <section class="hero" id="hero">
     <div class="bg" id="bg" aria-hidden="true"></div>
     <div class="tint" aria-hidden="true"></div>
     <div class="veil" aria-hidden="true"></div>
     <div class="grain" aria-hidden="true"></div>
 
-    <div class="center" aria-label="Introdução do site">
-      <!-- Logo estilo “sol” -->
-      <svg class="mark" viewBox="0 0 220 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <g stroke="rgba(122,60,60,.85)" stroke-width="3" stroke-linecap="round">
-          <path d="M110 10 V34"/>
-          <path d="M110 10 V34" transform="rotate(15 110 10)"/>
-          <path d="M110 10 V34" transform="rotate(30 110 10)"/>
-          <path d="M110 10 V34" transform="rotate(45 110 10)"/>
-          <path d="M110 10 V34" transform="rotate(60 110 10)"/>
-          <path d="M110 10 V34" transform="rotate(75 110 10)"/>
-          <path d="M110 10 V34" transform="rotate(-15 110 10)"/>
-          <path d="M110 10 V34" transform="rotate(-30 110 10)"/>
-          <path d="M110 10 V34" transform="rotate(-45 110 10)"/>
-          <path d="M110 10 V34" transform="rotate(-60 110 10)"/>
-          <path d="M110 10 V34" transform="rotate(-75 110 10)"/>
+    <header class="topbar" aria-label="Menu superior">
+      <div class="monogram" aria-label="Monograma">C + Y</div>
+
+      <nav class="nav">
+        <div class="dd">
+          <button type="button" data-dd="pages">Páginas ▾</button>
+          <div class="menu" data-menu="pages">
+            <a href="#historia">Nossa história</a>
+            <a href="#detalhes">Detalhes</a>
+            <a href="#local">Local</a>
+          </div>
+        </div>
+
+        <div class="dd">
+          <button type="button" data-dd="gifts">Presentes ▾</button>
+          <div class="menu" data-menu="gifts">
+            <a href="#presentes">Lista de presentes</a>
+            <a href="#pix">Pix</a>
+          </div>
+        </div>
+
+        <button type="button" id="openRsvp">Confirmar presença ▾</button>
+      </nav>
+    </header>
+
+    <div class="center" aria-label="Título principal">
+      <!-- Logo “sol” (feito do zero) -->
+      <svg class="mark" viewBox="0 0 240 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="rgba(116,58,56,.85)" stroke-width="3" stroke-linecap="round">
+          <!-- raios -->
+          <path d="M120 14 V42"/>
+          <path d="M120 14 V42" transform="rotate(10 120 14)"/>
+          <path d="M120 14 V42" transform="rotate(20 120 14)"/>
+          <path d="M120 14 V42" transform="rotate(30 120 14)"/>
+          <path d="M120 14 V42" transform="rotate(40 120 14)"/>
+          <path d="M120 14 V42" transform="rotate(50 120 14)"/>
+          <path d="M120 14 V42" transform="rotate(60 120 14)"/>
+          <path d="M120 14 V42" transform="rotate(70 120 14)"/>
+          <path d="M120 14 V42" transform="rotate(-10 120 14)"/>
+          <path d="M120 14 V42" transform="rotate(-20 120 14)"/>
+          <path d="M120 14 V42" transform="rotate(-30 120 14)"/>
+          <path d="M120 14 V42" transform="rotate(-40 120 14)"/>
+          <path d="M120 14 V42" transform="rotate(-50 120 14)"/>
+          <path d="M120 14 V42" transform="rotate(-60 120 14)"/>
+          <path d="M120 14 V42" transform="rotate(-70 120 14)"/>
         </g>
-        <path d="M70 78C70 55.9 87.9 38 110 38C132.1 38 150 55.9 150 78" fill="rgba(122,60,60,.85)"/>
-        <path d="M28 78H192" stroke="rgba(122,60,60,.7)" stroke-width="2"/>
+
+        <path d="M80 84C80 61.9 97.9 44 120 44C142.1 44 160 61.9 160 84" fill="rgba(116,58,56,.85)"/>
+        <path d="M28 84H212" stroke="rgba(116,58,56,.65)" stroke-width="2"/>
       </svg>
 
       <div class="names">
@@ -181,58 +283,40 @@
         <div class="amp">&amp;</div>
         <div class="bottom">Yasmin</div>
       </div>
-    </div>
-  </div>
 
-  <div class="debug" id="debug"></div>
+      <div class="date">12 / 09 / 2026</div>
+    </div>
+  </section>
 
   <script>
-    // =========================
-    // CONFIG
-    // =========================
-    const IMG_SRC = "./fundo.jpg";   // <<< troque aqui se seu arquivo for "fundo.jpeg" ou "fundo.png"
-    const NEXT_PAGE = "home.html";   // vamos criar depois
-    const SHOW_FOR_MS = 10000;
-
-    // força carregar a imagem e só então aplica como fundo
+    // ====== CONFIG DO FUNDO ======
+    // coloque sua imagem na raiz do repo e use o nome aqui:
+    const BG_IMAGE = "./fundo.jpg"; // ex: "./fundo.jpg"
     const bg = document.getElementById("bg");
-    const debug = document.getElementById("debug");
+    bg.style.setProperty("--bg-url", `url("${BG_IMAGE}?v=${Date.now()}")`);
 
-    function showDebug(msg){
-      debug.style.display = "block";
-      debug.textContent = msg;
+    // ====== DROPDOWNS ======
+    function closeAllMenus(){
+      document.querySelectorAll(".menu").forEach(m => m.style.display = "none");
     }
 
-    const img = new Image();
-    img.onload = () => {
-      // cache-bust leve pra evitar “não atualiza” do GitHub Pages
-      const url = IMG_SRC + "?v=" + Date.now();
-      bg.style.setProperty("--bg-url", `url("${url}")`);
-      // começa o timer após garantir que o fundo carregou
-      startTimer();
-    };
-    img.onerror = () => {
-      showDebug(
-        "Não consegui carregar a imagem de fundo. " +
-        "Confira se o arquivo existe na raiz do repo e se o nome é exatamente: fundo.jpg (respeita maiúsculas/minúsculas)."
-      );
-      // mesmo assim segue o timer
-      bg.style.setProperty("--bg-url", "none");
-      startTimer();
-    };
-    img.src = IMG_SRC;
+    document.querySelectorAll("[data-dd]").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const key = btn.getAttribute("data-dd");
+        const menu = document.querySelector(`[data-menu="${key}"]`);
+        const isOpen = menu.style.display === "block";
+        closeAllMenus();
+        menu.style.display = isOpen ? "none" : "block";
+        e.stopPropagation();
+      });
+    });
 
-    function startTimer(){
-      const splash = document.getElementById("splash");
-      setTimeout(() => {
-        splash.classList.add("fade-out");
-        setTimeout(() => {
-          window.location.href = NEXT_PAGE;
-        }, 850);
-      }, SHOW_FOR_MS);
-    }
+    document.addEventListener("click", closeAllMenus);
+
+    // ====== RSVP (por enquanto só alerta; depois a gente coloca modal) ======
+    document.getElementById("openRsvp").addEventListener("click", () => {
+      alert("Depois a gente coloca aqui o modal de confirmação de presença 🙂");
+    });
   </script>
 </body>
 </html>
-
-
