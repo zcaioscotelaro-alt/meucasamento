@@ -19,15 +19,17 @@
 
 *{box-sizing:border-box}
 html,body{height:100%}
+
 body{
   margin:0;
   font-family:"Cormorant Garamond", serif;
   background:#0b0b0f;
-  overflow:hidden;
+  overflow-x:hidden; /* NÃO trava vertical */
 }
 
-/* HERO */
+/* HERO 100% da tela */
 .hero{
+  height:100vh;
   min-height:100vh;
   position:relative;
   display:grid;
@@ -37,16 +39,16 @@ body{
 
 /* ===== FUNDO PROFISSIONAL (2 CAMADAS) ===== */
 
-/* Fundo preenchendo tela */
+/* Fundo preenchendo tela (elimina faixas) */
 .bg-blur{
   position:absolute;
   inset:0;
   background-image: var(--bg-url);
   background-size: cover;
-  background-position: center 35%;
+  background-position: center center;
   background-repeat:no-repeat;
-  filter: blur(10px) brightness(.95) saturate(.95);
-  transform: scale(1.08);
+  filter: blur(14px) brightness(.85) saturate(.95);
+  transform: scale(1.15); /* evita bordas do blur */
   z-index:0;
 }
 
@@ -55,8 +57,8 @@ body{
   position:absolute;
   inset:0;
   background-image: var(--bg-url);
-  background-size: contain;      /* NÃO CORTA */
-  background-position: center center;
+  background-size: contain;          /* NÃO corta */
+  background-position: center center;/* centraliza */
   background-repeat:no-repeat;
   z-index:1;
 }
@@ -71,6 +73,7 @@ body{
   mix-blend-mode: screen;
   opacity:.9;
   z-index:2;
+  pointer-events:none;
 }
 
 .veil{
@@ -79,6 +82,7 @@ body{
   background: var(--gold);
   opacity:.7;
   z-index:3;
+  pointer-events:none;
 }
 
 /* Textura leve */
@@ -89,6 +93,7 @@ body{
   opacity:.13;
   mix-blend-mode:overlay;
   z-index:4;
+  pointer-events:none;
 }
 
 /* NAV */
@@ -100,11 +105,13 @@ body{
   z-index:10;
   display:flex;
   justify-content:space-between;
+  align-items:center;
   padding:0 28px;
-  color:rgba(255,255,255,.7);
+  color:rgba(255,255,255,.70);
   font-size:13px;
   letter-spacing:1.2px;
   text-transform:uppercase;
+  user-select:none;
 }
 
 .monogram{
@@ -125,17 +132,20 @@ body{
   z-index:10;
   text-align:center;
   color:var(--ink);
+  transform: translateY(10px);
 }
 
 .mark{
   width:160px;
   margin:0 auto 8px;
+  opacity:.95;
 }
 
 .names .top,
 .names .bottom{
   font-size: clamp(56px,6vw,92px);
   font-weight:500;
+  line-height: 1;
 }
 
 .names .amp{
@@ -143,6 +153,7 @@ body{
   font-style:italic;
   color:var(--ink-soft);
   margin:10px 0;
+  line-height: 1;
 }
 
 .date{
@@ -155,21 +166,21 @@ body{
 @media(max-width:720px){
   .topbar{padding:0 14px}
   .mark{width:130px}
-  .date{font-size:14px}
+  .date{font-size:14px; letter-spacing:2px}
+  .nav{gap:10px; font-size:12px}
 }
 </style>
 </head>
 
 <body>
-
 <section class="hero">
 
   <!-- FUNDO -->
-  <div class="bg-blur" id="bgBlur"></div>
-  <div class="bg-contain" id="bgContain"></div>
-  <div class="tint"></div>
-  <div class="veil"></div>
-  <div class="grain"></div>
+  <div class="bg-blur" id="bgBlur" aria-hidden="true"></div>
+  <div class="bg-contain" id="bgContain" aria-hidden="true"></div>
+  <div class="tint" aria-hidden="true"></div>
+  <div class="veil" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
 
   <!-- MENU -->
   <header class="topbar">
@@ -183,15 +194,16 @@ body{
 
   <!-- CENTRO -->
   <div class="center">
-
     <!-- Logo Sol -->
-    <svg class="mark" viewBox="0 0 240 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="mark" viewBox="0 0 240 130" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <g stroke="rgba(116,58,56,.85)" stroke-width="3" stroke-linecap="round">
         <path d="M120 14 V42"/>
         <path d="M120 14 V42" transform="rotate(20 120 14)"/>
         <path d="M120 14 V42" transform="rotate(-20 120 14)"/>
         <path d="M120 14 V42" transform="rotate(40 120 14)"/>
         <path d="M120 14 V42" transform="rotate(-40 120 14)"/>
+        <path d="M120 14 V42" transform="rotate(60 120 14)"/>
+        <path d="M120 14 V42" transform="rotate(-60 120 14)"/>
       </g>
       <path d="M80 84C80 61.9 97.9 44 120 44C142.1 44 160 61.9 160 84" fill="rgba(116,58,56,.85)"/>
       <path d="M28 84H212" stroke="rgba(116,58,56,.65)" stroke-width="2"/>
@@ -204,22 +216,19 @@ body{
     </div>
 
     <div class="date">12 / 09 / 2026</div>
-
   </div>
 
 </section>
 
 <script>
-const BG_IMAGE = "./fundo.jpg";
+  const BG_IMAGE = "./fundo.jpg"; // troque se o nome for outro
 
-const blur = document.getElementById("bgBlur");
-const contain = document.getElementById("bgContain");
+  const blur = document.getElementById("bgBlur");
+  const contain = document.getElementById("bgContain");
 
-const url = `url("${BG_IMAGE}?v=${Date.now()}")`;
-
-blur.style.setProperty("--bg-url", url);
-contain.style.setProperty("--bg-url", url);
+  const url = `url("${BG_IMAGE}?v=${Date.now()}")`;
+  blur.style.setProperty("--bg-url", url);
+  contain.style.setProperty("--bg-url", url);
 </script>
-
 </body>
 </html>
