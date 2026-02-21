@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Casamento - Caio & (Nome)</title>
+  <style>
+    :root{
+      --bg:#0f0f14; --card:#161622; --txt:#f3f3f5; --muted:#b8b8c7;
+      --accent:#ffb4c6;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: radial-gradient(1000px 600px at 20% 0%, #251629 0%, var(--bg) 50%);
+      color:var(--txt);
+    }
+    a{color:inherit}
+    .wrap{max-width:980px; margin:0 auto; padding:28px 18px 60px;}
+    header{
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:18px 18px; border-radius:18px; background:rgba(22,22,34,.8);
+      border:1px solid rgba(255,255,255,.06);
+      position:sticky; top:14px; backdrop-filter: blur(10px);
+    }
+    header nav{display:flex; flex-wrap:wrap; gap:10px}
+    header nav a{
+      text-decoration:none; padding:8px 10px; border-radius:10px;
+      color:var(--muted); border:1px solid transparent;
+    }
+    header nav a:hover{color:var(--txt); border-color:rgba(255,255,255,.10)}
+    .hero{
+      margin-top:18px; padding:34px 22px; border-radius:22px;
+      background: linear-gradient(135deg, rgba(255,180,198,.14), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .hero h1{margin:0; font-size: clamp(28px, 4vw, 46px); letter-spacing:.4px;}
+    .hero p{margin:10px 0 0; color:var(--muted); font-size: 16px; line-height:1.5}
+    .grid{display:grid; gap:14px; margin-top:14px}
+    @media(min-width:860px){ .grid{grid-template-columns: 1.3fr .7fr;} }
+    .card{
+      background:rgba(22,22,34,.8);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:18px; padding:18px;
+    }
+    .badge{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:8px 10px; border-radius:999px;
+      background: rgba(255,180,198,.12);
+      border:1px solid rgba(255,180,198,.22);
+      color:var(--txt);
+      font-weight:600; font-size:13px;
+    }
+    .countdown{
+      display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; margin-top:14px;
+    }
+    .countdown .box{
+      padding:12px; border-radius:14px; text-align:center;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .countdown .num{font-size:22px; font-weight:800}
+    .countdown .lbl{color:var(--muted); font-size:12px; margin-top:4px}
+    section{margin-top:16px}
+    section h2{margin:0 0 10px; font-size:20px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px; border-radius:12px; text-decoration:none;
+      background: var(--accent); color:#1a0f13; font-weight:800;
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .btn:hover{filter: brightness(1.02)}
+    form{display:grid; gap:10px}
+    input, textarea, select{
+      width:100%; padding:12px 12px; border-radius:12px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03); color:var(--txt);
+      outline:none;
+    }
+    input::placeholder, textarea::placeholder{color:rgba(184,184,199,.7)}
+    small{color:var(--muted)}
+    footer{margin-top:22px; color:var(--muted); text-align:center}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span class="badge">💍 Caio & (Nome)</span>
+      </div>
+      <nav>
+        <a href="#detalhes">Detalhes</a>
+        <a href="#rsvp">Confirmar</a>
+        <a href="#presentes">Presentes</a>
+        <a href="#como-chegar">Como chegar</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <h1>Vamos nos casar! 🎉</h1>
+      <p>Setembro de 2026 • Estamos muito felizes e queremos você com a gente nesse dia.</p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="badge">⏳ Contagem regressiva</div>
+          <div class="countdown" aria-label="Contagem regressiva">
+            <div class="box"><div class="num" id="d">—</div><div class="lbl">dias</div></div>
+            <div class="box"><div class="num" id="h">—</div><div class="lbl">horas</div></div>
+            <div class="box"><div class="num" id="m">—</div><div class="lbl">min</div></div>
+            <div class="box"><div class="num" id="s">—</div><div class="lbl">seg</div></div>
+          </div>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn" href="#rsvp">Confirmar presença</a>
+            <a class="btn" style="background:rgba(255,255,255,.06); color:var(--txt)" href="#detalhes">Ver detalhes</a>
+          </div>
+        </div>
+
+        <div class="card" id="detalhes">
+          <h2>📍 Detalhes</h2>
+          <p style="color:var(--muted); margin:0 0 10px; line-height:1.5">
+            <b>Data:</b> (coloque o dia aqui) <br/>
+            <b>Horário:</b> (coloque o horário) <br/>
+            <b>Local:</b> (nome do lugar) <br/>
+            <b>Traje:</b> (ex.: social / esporte fino)
+          </p>
+          <small>Dica: aqui você pode colocar regras do local, crianças, etc.</small>
+        </div>
+      </div>
+    </div>
+
+    <section id="rsvp" class="card">
+      <h2>✅ Confirme sua presença</h2>
+      <p style="margin:0 0 12px; color:var(--muted)">Preencha rapidinho. (Por enquanto, isso só “simula”. Depois eu conecto no Google Sheets pra salvar.)</p>
+      <form id="rsvpForm">
+        <input required name="nome" placeholder="Seu nome" />
+        <select name="qtd">
+          <option value="1">1 pessoa</option>
+          <option value="2">2 pessoas</option>
+          <option value="3">3 pessoas</option>
+          <option value="4">4 pessoas</option>
+        </select>
+        <input name="telefone" placeholder="Telefone (opcional)" />
+        <textarea name="obs" rows="3" placeholder="Restrições alimentares / observações (opcional)"></textarea>
+        <button class="btn" type="submit">Enviar confirmação</button>
+        <small id="msg"></small>
+      </form>
+    </section>
+
+    <section id="presentes" class="card">
+      <h2>🎁 Presentes</h2>
+      <p style="color:var(--muted); margin-top:0">
+        Coloque seus links aqui (Amazon, Magalu, etc) ou um PIX.
+      </p>
+      <ul style="margin:0; padding-left:18px; color:var(--muted)">
+        <li><a href="#" target="_blank" rel="noreferrer">Lista 1</a></li>
+        <li><a href="#" target="_blank" rel="noreferrer">Lista 2</a></li>
+      </ul>
+    </section>
+
+    <section id="como-chegar" class="card">
+      <h2>🗺️ Como chegar</h2>
+      <p style="color:var(--muted); margin-top:0">
+        Depois eu coloco aqui o mapa do Google com o endereço certinho.
+      </p>
+      <!-- Exemplo (depois substitui pelo embed real do Maps) -->
+      <div style="border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.06)">
+        <div style="padding:18px; background:rgba(255,255,255,.03); color:var(--muted)">
+          Área do mapa (embed do Google Maps)
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Feito com carinho 💗 • Caio & (Nome)
+    </footer>
+  </div>
+
+  <script>
+    // 1) Coloque a data do casamento aqui (ano-mês-diaThora:minuto:segundo)
+    const WEDDING_DATE = new Date("2026-09-12T16:00:00"); // <-- troque para a data real
+
+    function tick(){
+      const now = new Date();
+      let diff = WEDDING_DATE - now;
+
+      if (diff < 0) diff = 0;
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      document.getElementById("d").textContent = days;
+      document.getElementById("h").textContent = String(hours).padStart(2,"0");
+      document.getElementById("m").textContent = String(minutes).padStart(2,"0");
+      document.getElementById("s").textContent = String(seconds).padStart(2,"0");
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // RSVP (simulação)
+    const form = document.getElementById("rsvpForm");
+    const msg = document.getElementById("msg");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      msg.textContent = `Confirmação enviada! Obrigado, ${data.nome}. ✅`;
+      form.reset();
+    });
+  </script>
+</body>
+</html>
