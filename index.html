@@ -37,12 +37,14 @@
     }
 
     /* Foto de fundo (troque a URL quando tiver a foto de vocês) */
-    .bg{
-      position:absolute;
-      inset:0;
-      background-image: url("https://images.unsplash.com/photo-1523438097201-f55fdc5e3a6b?auto=format&fit=crop&w=2200&q=80");
-      background-size: cover;
-      background-position: center;
+    ..bg{
+       position:absolute;
+       inset:0;
+       background-image: url("fundo.jpg"); /* sua foto */
+       background-size: cover;
+       background-position: center;
+       filter: brightness(0.85) saturate(0.95);
+    }
       filter: saturate(0.95) contrast(1.05);
       transform: scale(1.02);
     }
@@ -189,3 +191,4 @@
   </script>
 </body>
 </html>
+
