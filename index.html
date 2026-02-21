@@ -3,186 +3,619 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Casamento - Caio & (Nome)</title>
+  <title>Casamento do Caio e Yasmin</title>
+  <meta name="description" content="Casamento do Caio e Yasmin — 12/09/2026 às 18h — São Gonçalo, RJ" />
+
   <style>
     :root{
-      --bg:#0f0f14; --card:#161622; --txt:#f3f3f5; --muted:#b8b8c7;
-      --accent:#ffb4c6;
+      --bg: #0b0b0f;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.04);
+      --border: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.65);
+      --soft: rgba(255,255,255,.10);
+      --accent: #ffffff;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
     }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
-      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background: radial-gradient(1000px 600px at 20% 0%, #251629 0%, var(--bg) 50%);
-      color:var(--txt);
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 18% 8%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 55%),
+        radial-gradient(900px 500px at 85% 5%, rgba(255,255,255,.06) 0%, rgba(255,255,255,0) 55%),
+        var(--bg);
+      overflow-x:hidden;
     }
+
     a{color:inherit}
-    .wrap{max-width:980px; margin:0 auto; padding:28px 18px 60px;}
-    header{
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-      padding:18px 18px; border-radius:18px; background:rgba(22,22,34,.8);
-      border:1px solid rgba(255,255,255,.06);
-      position:sticky; top:14px; backdrop-filter: blur(10px);
+    .wrap{
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 22px 16px 70px;
     }
-    header nav{display:flex; flex-wrap:wrap; gap:10px}
-    header nav a{
-      text-decoration:none; padding:8px 10px; border-radius:10px;
-      color:var(--muted); border:1px solid transparent;
-    }
-    header nav a:hover{color:var(--txt); border-color:rgba(255,255,255,.10)}
-    .hero{
-      margin-top:18px; padding:34px 22px; border-radius:22px;
-      background: linear-gradient(135deg, rgba(255,180,198,.14), rgba(255,255,255,.04));
-      border:1px solid rgba(255,255,255,.06);
-    }
-    .hero h1{margin:0; font-size: clamp(28px, 4vw, 46px); letter-spacing:.4px;}
-    .hero p{margin:10px 0 0; color:var(--muted); font-size: 16px; line-height:1.5}
-    .grid{display:grid; gap:14px; margin-top:14px}
-    @media(min-width:860px){ .grid{grid-template-columns: 1.3fr .7fr;} }
-    .card{
-      background:rgba(22,22,34,.8);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:18px; padding:18px;
-    }
-    .badge{
-      display:inline-flex; gap:8px; align-items:center;
-      padding:8px 10px; border-radius:999px;
-      background: rgba(255,180,198,.12);
-      border:1px solid rgba(255,180,198,.22);
-      color:var(--txt);
-      font-weight:600; font-size:13px;
-    }
-    .countdown{
-      display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; margin-top:14px;
-    }
-    .countdown .box{
-      padding:12px; border-radius:14px; text-align:center;
+
+    /* Top bar */
+    .topbar{
+      position: sticky;
+      top: 14px;
+      z-index: 50;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 14px 14px;
+      border-radius: 16px;
       background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(10px);
     }
-    .countdown .num{font-size:22px; font-weight:800}
-    .countdown .lbl{color:var(--muted); font-size:12px; margin-top:4px}
-    section{margin-top:16px}
-    section h2{margin:0 0 10px; font-size:20px}
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width: 240px;
+    }
+    .dot{
+      width: 10px; height: 10px; border-radius: 99px;
+      background: rgba(255,255,255,.86);
+      box-shadow: 0 0 0 6px rgba(255,255,255,.08);
+      flex: 0 0 auto;
+    }
+    .brand strong{
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+    .brand span{
+      color: var(--muted);
+      font-size: 12.5px;
+      display:block;
+      margin-top: 2px;
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      text-decoration:none;
+      font-size: 13px;
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+    }
+    .nav a:hover{
+      color: var(--text);
+      border-color: rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 14px; border-radius:12px; text-decoration:none;
-      background: var(--accent); color:#1a0f13; font-weight:800;
-      border:1px solid rgba(255,255,255,.06);
+      appearance:none;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.92);
+      color: #0b0b0f;
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 13px;
+      cursor:pointer;
+      transition: transform .08s ease, filter .12s ease;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      line-height: 1;
+      white-space: nowrap;
     }
     .btn:hover{filter: brightness(1.02)}
-    form{display:grid; gap:10px}
-    input, textarea, select{
-      width:100%; padding:12px 12px; border-radius:12px;
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.03); color:var(--txt);
-      outline:none;
+    .btn:active{transform: translateY(1px)}
+    .btn-ghost{
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      border-color: rgba(255,255,255,.12);
+      font-weight: 700;
     }
-    input::placeholder, textarea::placeholder{color:rgba(184,184,199,.7)}
-    small{color:var(--muted)}
-    footer{margin-top:22px; color:var(--muted); text-align:center}
+
+    /* Hero */
+    .hero{
+      margin-top: 16px;
+      border-radius: 26px;
+      padding: 26px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(140deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:-120px -160px auto auto;
+      width: 360px;
+      height: 360px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.20), rgba(255,255,255,0) 60%);
+      transform: rotate(20deg);
+      pointer-events:none;
+    }
+    .hero-grid{
+      display:grid;
+      gap: 18px;
+      align-items: start;
+    }
+    @media(min-width: 900px){
+      .hero-grid{grid-template-columns: 1.1fr .9fr;}
+    }
+
+    h1{
+      margin: 0;
+      font-size: clamp(30px, 4vw, 52px);
+      letter-spacing: -0.5px;
+      line-height: 1.05;
+    }
+    .subtitle{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 15.5px;
+      line-height: 1.6;
+      max-width: 58ch;
+    }
+
+    .pillrow{
+      margin-top: 14px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 9px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+
+    /* Countdown */
+    .panel{
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      box-shadow: 0 10px 40px rgba(0,0,0,.35);
+      overflow:hidden;
+    }
+    .panel-head{
+      padding: 14px 14px 0;
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: .35px;
+      text-transform: uppercase;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .countdown{
+      padding: 12px 14px 16px;
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .box{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 14px 10px;
+      text-align:center;
+    }
+    .num{
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+    .lbl{
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .panel-foot{
+      padding: 0 14px 14px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+      justify-content:flex-start;
+    }
+
+    /* Sections */
+    section{
+      margin-top: 16px;
+    }
+    .section-card{
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 18px;
+    }
+    .section-title{
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+    .muted{color:var(--muted); line-height:1.6}
+
+    /* Story */
+    .story-grid{
+      display:grid;
+      gap: 12px;
+    }
+    @media(min-width: 900px){
+      .story-grid{grid-template-columns: 1fr 1fr;}
+    }
+    .story-card{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.20);
+      overflow:hidden;
+    }
+    .story-card img{
+      width:100%;
+      height: 220px;
+      object-fit: cover;
+      display:block;
+      filter: grayscale(15%) contrast(105%);
+      transform: scale(1.01);
+    }
+    .story-body{padding: 14px}
+    .story-body h3{
+      margin:0;
+      font-size: 15.5px;
+      letter-spacing:-0.2px;
+    }
+    .story-body p{
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Details */
+    .details-grid{
+      display:grid;
+      gap: 12px;
+      align-items: start;
+    }
+    @media(min-width: 900px){
+      .details-grid{grid-template-columns: 1fr 1fr;}
+    }
+    .kv{
+      display:grid;
+      gap: 8px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.20);
+    }
+    .kv div{
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 10px 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.02);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .kv b{font-size: 13px}
+    .kv span{color: var(--muted); font-size: 13px; text-align:right}
+
+    .map{
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.20);
+      min-height: 260px;
+    }
+    .map iframe{width:100%; height: 320px; border:0; display:block; filter: grayscale(25%) contrast(105%);}
+
+    /* Modal RSVP */
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.62);
+      backdrop-filter: blur(8px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index: 100;
+    }
+    .modal{
+      width: min(720px, 100%);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(12,12,16,.92);
+      box-shadow: 0 30px 90px rgba(0,0,0,.70);
+      overflow:hidden;
+      transform: translateY(6px);
+    }
+    .modal-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    .modal-head h2{
+      margin:0;
+      font-size: 16px;
+      letter-spacing: -0.1px;
+    }
+    .modal-head p{margin:6px 0 0; color: var(--muted); font-size: 13.5px; line-height: 1.5}
+    .close{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 8px 10px;
+      cursor:pointer;
+      font-weight: 800;
+    }
+    .modal-body{padding: 14px 16px 16px;}
+    form{display:grid; gap: 10px}
+    input, textarea, select{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      outline:none;
+      font-size: 14px;
+    }
+    input::placeholder, textarea::placeholder{color: rgba(255,255,255,.45)}
+    textarea{resize: vertical}
+    .form-row{
+      display:grid;
+      gap: 10px;
+    }
+    @media(min-width: 700px){
+      .form-row{grid-template-columns: 1.2fr .8fr;}
+    }
+    .hint{
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+    .toast{
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-size: 13px;
+      display:none;
+    }
+
+    footer{
+      margin-top: 18px;
+      text-align:center;
+      color: var(--muted);
+      font-size: 12.5px;
+      padding: 6px 0;
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-    <header>
-      <div style="display:flex; align-items:center; gap:10px;">
-        <span class="badge">💍 Caio & (Nome)</span>
+    <header class="topbar">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <div>
+          <strong>Casamento do Caio e Yasmin</strong>
+          <span>12/09/2026 • 18:00 • São Gonçalo - RJ</span>
+        </div>
       </div>
-      <nav>
+
+      <nav class="nav" aria-label="Atalhos">
+        <a href="#historia">História</a>
         <a href="#detalhes">Detalhes</a>
-        <a href="#rsvp">Confirmar</a>
-        <a href="#presentes">Presentes</a>
-        <a href="#como-chegar">Como chegar</a>
+        <a href="#local">Local</a>
+        <button class="btn btn-ghost" type="button" id="openRsvpTop">✅ Confirmar presença</button>
       </nav>
     </header>
 
-    <div class="hero">
-      <h1>Vamos nos casar! 🎉</h1>
-      <p>Setembro de 2026 • Estamos muito felizes e queremos você com a gente nesse dia.</p>
+    <main>
+      <section class="hero" aria-label="Introdução">
+        <div class="hero-grid">
+          <div>
+            <h1>Caio & Yasmin</h1>
+            <p class="subtitle">
+              Um dia especial, com pessoas especiais. Obrigado por fazer parte da nossa história.
+            </p>
 
-      <div class="grid">
-        <div class="card">
-          <div class="badge">⏳ Contagem regressiva</div>
-          <div class="countdown" aria-label="Contagem regressiva">
-            <div class="box"><div class="num" id="d">—</div><div class="lbl">dias</div></div>
-            <div class="box"><div class="num" id="h">—</div><div class="lbl">horas</div></div>
-            <div class="box"><div class="num" id="m">—</div><div class="lbl">min</div></div>
-            <div class="box"><div class="num" id="s">—</div><div class="lbl">seg</div></div>
+            <div class="pillrow" aria-label="Informações rápidas">
+              <span class="pill">📅 12 de setembro de 2026</span>
+              <span class="pill">🕕 18:00</span>
+              <span class="pill">📍 Centro, São Gonçalo - RJ</span>
+            </div>
+
+            <div class="pillrow" style="margin-top:14px;">
+              <button class="btn" type="button" id="openRsvpHero">✅ Confirmar presença</button>
+              <a class="btn btn-ghost" href="#detalhes">Ver detalhes</a>
+            </div>
           </div>
-          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn" href="#rsvp">Confirmar presença</a>
-            <a class="btn" style="background:rgba(255,255,255,.06); color:var(--txt)" href="#detalhes">Ver detalhes</a>
+
+          <div class="panel" aria-label="Contagem regressiva">
+            <div class="panel-head">
+              <span>Contagem regressiva</span>
+              <span style="color: var(--muted); font-weight:700" id="targetLabel">12/09/2026 • 18:00</span>
+            </div>
+            <div class="countdown">
+              <div class="box"><div class="num" id="d">—</div><div class="lbl">dias</div></div>
+              <div class="box"><div class="num" id="h">—</div><div class="lbl">horas</div></div>
+              <div class="box"><div class="num" id="m">—</div><div class="lbl">min</div></div>
+              <div class="box"><div class="num" id="s">—</div><div class="lbl">seg</div></div>
+            </div>
+            <div class="panel-foot">
+              <a class="btn btn-ghost" href="#historia">📷 Nossa história</a>
+              <a class="btn btn-ghost" href="#local">🗺️ Como chegar</a>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div class="card" id="detalhes">
-          <h2>📍 Detalhes</h2>
-          <p style="color:var(--muted); margin:0 0 10px; line-height:1.5">
-            <b>Data:</b> (coloque o dia aqui) <br/>
-            <b>Horário:</b> (coloque o horário) <br/>
-            <b>Local:</b> (nome do lugar) <br/>
-            <b>Traje:</b> (ex.: social / esporte fino)
-          </p>
-          <small>Dica: aqui você pode colocar regras do local, crianças, etc.</small>
+      <section id="historia" class="section-card" aria-label="História do casal">
+        <h2 class="section-title">Nossa história</h2>
+        <p class="muted" style="margin-top:0">
+          (Aqui é só um exemplo com fotos da internet pra você ver como fica. Depois a gente troca pelas fotos de vocês.)
+        </p>
+
+        <div class="story-grid">
+          <article class="story-card">
+            <img alt="Foto placeholder 1" src="https://images.unsplash.com/photo-1520975682030-46c1c6b16070?auto=format&fit=crop&w=1600&q=80" />
+            <div class="story-body">
+              <h3>O começo</h3>
+              <p>Um encontro simples que virou uma certeza. Aos poucos, a vida foi ficando mais bonita — e mais nossa.</p>
+            </div>
+          </article>
+
+          <article class="story-card">
+            <img alt="Foto placeholder 2" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=1600&q=80" />
+            <div class="story-body">
+              <h3>As memórias</h3>
+              <p>Viagens, conversas, risadas e planos. A gente aprendeu a construir junto — com leveza e carinho.</p>
+            </div>
+          </article>
+
+          <article class="story-card">
+            <img alt="Foto placeholder 3" src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1600&q=80" />
+            <div class="story-body">
+              <h3>O pedido</h3>
+              <p>Não foi só um “sim”. Foi a confirmação de que o futuro faz sentido quando é com a pessoa certa.</p>
+            </div>
+          </article>
+
+          <article class="story-card">
+            <img alt="Foto placeholder 4" src="https://images.unsplash.com/photo-1523438097201-f55fdc5e3a6b?auto=format&fit=crop&w=1600&q=80" />
+            <div class="story-body">
+              <h3>O grande dia</h3>
+              <p>Agora é oficial: vamos celebrar com você. Obrigado por estar presente nessa nova etapa.</p>
+            </div>
+          </article>
         </div>
+      </section>
+
+      <section id="detalhes" class="section-card" aria-label="Detalhes do evento">
+        <h2 class="section-title">Detalhes</h2>
+
+        <div class="details-grid">
+          <div class="kv" aria-label="Informações principais">
+            <div><b>Data</b><span>12/09/2026</span></div>
+            <div><b>Horário</b><span>18:00</span></div>
+            <div><b>Endereço</b><span>Av. Pres. Kennedy, 655 - Centro, São Gonçalo - RJ</span></div>
+          </div>
+
+          <div class="kv" aria-label="Ações">
+            <div style="justify-content:flex-start; gap:10px; flex-wrap:wrap;">
+              <button class="btn" type="button" id="openRsvpDetails">✅ Confirmar presença</button>
+              <a class="btn btn-ghost" target="_blank" rel="noreferrer"
+                 href="https://www.google.com/maps/search/?api=1&query=Av.%20Pres.%20Kennedy%2C%20655%20-%20Centro%2C%20S%C3%A3o%20Gon%C3%A7alo%20-%20RJ">
+                 🗺️ Abrir no Google Maps
+              </a>
+            </div>
+            <div>
+              <b>Observações</b>
+              <span>Chegue com 15 min de antecedência, se possível.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="local" class="section-card" aria-label="Local e mapa">
+        <h2 class="section-title">Local</h2>
+        <p class="muted" style="margin-top:0">
+          Av. Pres. Kennedy, 655 - Centro, São Gonçalo - RJ
+        </p>
+
+        <div class="map" role="img" aria-label="Mapa do local">
+          <iframe
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Av.%20Pres.%20Kennedy%2C%20655%20-%20Centro%2C%20S%C3%A3o%20Gon%C3%A7alo%20-%20RJ&output=embed">
+          </iframe>
+        </div>
+      </section>
+
+      <footer>
+        Feito com carinho • Caio & Yasmin
+      </footer>
+    </main>
+  </div>
+
+  <!-- RSVP Modal -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <h2 id="modalTitle">Confirmar presença</h2>
+          <p>Preencha rapidinho. (Hoje está como “simulação”; depois a gente conecta no Google Sheets pra salvar.)</p>
+        </div>
+        <button class="close" type="button" id="closeModal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="rsvpForm">
+          <div class="form-row">
+            <div>
+              <input required name="nome" placeholder="Seu nome completo" />
+              <div class="hint">Digite como você quer que apareça na lista.</div>
+            </div>
+            <div>
+              <select name="qtd" aria-label="Quantidade de pessoas">
+                <option value="1">1 pessoa</option>
+                <option value="2">2 pessoas</option>
+                <option value="3">3 pessoas</option>
+                <option value="4">4 pessoas</option>
+              </select>
+              <div class="hint">Incluindo você.</div>
+            </div>
+          </div>
+
+          <input name="telefone" placeholder="Telefone (opcional)" />
+          <textarea name="obs" rows="3" placeholder="Restrições alimentares / observações (opcional)"></textarea>
+
+          <button class="btn" type="submit">Enviar confirmação</button>
+          <div class="toast" id="toast"></div>
+        </form>
       </div>
     </div>
-
-    <section id="rsvp" class="card">
-      <h2>✅ Confirme sua presença</h2>
-      <p style="margin:0 0 12px; color:var(--muted)">Preencha rapidinho. (Por enquanto, isso só “simula”. Depois eu conecto no Google Sheets pra salvar.)</p>
-      <form id="rsvpForm">
-        <input required name="nome" placeholder="Seu nome" />
-        <select name="qtd">
-          <option value="1">1 pessoa</option>
-          <option value="2">2 pessoas</option>
-          <option value="3">3 pessoas</option>
-          <option value="4">4 pessoas</option>
-        </select>
-        <input name="telefone" placeholder="Telefone (opcional)" />
-        <textarea name="obs" rows="3" placeholder="Restrições alimentares / observações (opcional)"></textarea>
-        <button class="btn" type="submit">Enviar confirmação</button>
-        <small id="msg"></small>
-      </form>
-    </section>
-
-    <section id="presentes" class="card">
-      <h2>🎁 Presentes</h2>
-      <p style="color:var(--muted); margin-top:0">
-        Coloque seus links aqui (Amazon, Magalu, etc) ou um PIX.
-      </p>
-      <ul style="margin:0; padding-left:18px; color:var(--muted)">
-        <li><a href="#" target="_blank" rel="noreferrer">Lista 1</a></li>
-        <li><a href="#" target="_blank" rel="noreferrer">Lista 2</a></li>
-      </ul>
-    </section>
-
-    <section id="como-chegar" class="card">
-      <h2>🗺️ Como chegar</h2>
-      <p style="color:var(--muted); margin-top:0">
-        Depois eu coloco aqui o mapa do Google com o endereço certinho.
-      </p>
-      <!-- Exemplo (depois substitui pelo embed real do Maps) -->
-      <div style="border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.06)">
-        <div style="padding:18px; background:rgba(255,255,255,.03); color:var(--muted)">
-          Área do mapa (embed do Google Maps)
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      Feito com carinho 💗 • Caio & (Nome)
-    </footer>
   </div>
 
   <script>
-    // 1) Coloque a data do casamento aqui (ano-mês-diaThora:minuto:segundo)
-    const WEDDING_DATE = new Date("2026-09-12T16:00:00"); // <-- troque para a data real
+    // Data/hora do casamento (horário do Brasil)
+    const WEDDING_DATE = new Date("2026-09-12T18:00:00-03:00");
 
     function tick(){
       const now = new Date();
       let diff = WEDDING_DATE - now;
-
       if (diff < 0) diff = 0;
 
       const totalSeconds = Math.floor(diff / 1000);
@@ -199,13 +632,49 @@
     tick();
     setInterval(tick, 1000);
 
+    // Modal controls
+    const overlay = document.getElementById("modalOverlay");
+    const closeModalBtn = document.getElementById("closeModal");
+
+    function openModal(){
+      overlay.style.display = "flex";
+      document.body.style.overflow = "hidden";
+      // foco no primeiro input
+      setTimeout(() => {
+        const first = document.querySelector('#rsvpForm input[name="nome"]');
+        if (first) first.focus();
+      }, 50);
+    }
+
+    function closeModal(){
+      overlay.style.display = "none";
+      document.body.style.overflow = "";
+    }
+
+    document.getElementById("openRsvpTop").addEventListener("click", openModal);
+    document.getElementById("openRsvpHero").addEventListener("click", openModal);
+    document.getElementById("openRsvpDetails").addEventListener("click", openModal);
+    closeModalBtn.addEventListener("click", closeModal);
+
+    // Fecha clicando fora
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeModal();
+    });
+
+    // Fecha com ESC
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && overlay.style.display === "flex") closeModal();
+    });
+
     // RSVP (simulação)
     const form = document.getElementById("rsvpForm");
-    const msg = document.getElementById("msg");
+    const toast = document.getElementById("toast");
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const data = Object.fromEntries(new FormData(form).entries());
-      msg.textContent = `Confirmação enviada! Obrigado, ${data.nome}. ✅`;
+      toast.style.display = "block";
+      toast.textContent = `Confirmação enviada! Obrigado, ${data.nome}. ✅`;
       form.reset();
     });
   </script>
