@@ -19,7 +19,9 @@
 
 *{box-sizing:border-box}
 html,body{height:100%}
-  overflow-x:hidden;
+  margin:0;
+  padding:0;
+  overflow:hidden; /* trava qualquer scroll */
 
 body{
   margin:0;
@@ -30,13 +32,11 @@ body{
 
 /* HERO 100% da tela */
 .hero{
-  height:100vh;
-  min-height:100vh;
+  height:100dvh; /* usa viewport dinâmica moderna */
   position:relative;
   display:grid;
   place-items:center;
   isolation:isolate;
-  overflow:hidden;
 }
 
 /* ===== FUNDO (TELA TODA) ===== */
@@ -208,5 +208,6 @@ body{
 </script>
 </body>
 </html>
+
 
 
